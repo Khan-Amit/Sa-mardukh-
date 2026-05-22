@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SA MARDUK_F SYSTEM DASHBOARD</title>
+    <title>SA MARDUK_F SATELLITE BASE INTERFACE</title>
     <style>
         :root {
             --bg-midnight: #020613;
@@ -23,16 +23,15 @@
             display: flex; justify-content: center; align-items: center;
             min-height: 100vh;
         }
-        /* Mobile System Interface Container - Matches Your Exact Visual Layout */
         .phone-frame {
             width: 360px; height: 780px;
             background: #000000; border-radius: 20px;
             display: flex; flex-direction: column; padding: 15px; box-sizing: border-box;
             overflow-y: auto; border: 4px solid #1f293d;
         }
-        h2 { text-align: center; font-size: 14px; margin: 0 0 10px; letter-spacing: 1px; color: var(--accent-blue); text-transform: uppercase; }
+        h2 { text-align: center; font-size: 13px; margin: 0 0 10px; letter-spacing: 1px; color: var(--accent-blue); text-transform: uppercase; }
         
-        /* FIXED: Unified Single Line Selector Panel (Mutually Exclusive Logic) */
+        /* UNIFIED SEPARATION DROPDOWN - PREVENTS OVERLAPPING */
         .source-scroll-container {
             background: var(--panel-navy); padding: 8px; border-radius: 8px;
             margin-bottom: 10px; border: 1px solid #132247; text-align: left;
@@ -43,7 +42,6 @@
             padding: 6px; border-radius: 4px; font-family: monospace; font-size: 11px; cursor: pointer;
         }
 
-        /* Gauge Area */
         .gauge-area { display: flex; flex-direction: column; align-items: center; margin-bottom: 10px; }
         .pue-circle {
             width: 130px; height: 130px; border-radius: 50%;
@@ -53,27 +51,22 @@
         .pue-title { font-size: 26px; font-weight: bold; color: var(--text-white); }
         .pue-sub { font-size: 8px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; text-align: center; }
 
-        /* Interface Control Buttons Layer */
         .btn-main { width: 100%; background: var(--accent-green); color: #000; padding: 12px; font-size: 13px; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .btn-row { display: flex; gap: 8px; margin-bottom: 8px; }
-        .btn-row button { flex: 1; padding: 11px; font-size: 12px; font-weight: bold; border: none; border-radius: 6px; color: #fff; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; }
+        .btn-row button { flex: 1; padding: 11px; font-size: 12px; font-weight: bold; border: none; border-radius: 6px; color: #fff; text-transform: uppercase; cursor: pointer; }
         .btn-probe { background: var(--accent-yellow); color: #000 !important; }
         .btn-stall { background: var(--accent-blue); }
         .btn-flush { width: 100%; background: var(--accent-red); color: #fff; padding: 10px; font-size: 12px; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; margin-bottom: 10px; text-transform: uppercase; }
 
-        /* Statistics Metrics Grid Blocks */
         .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
         .metric-card { background: var(--panel-navy); border-radius: 6px; padding: 10px; display: flex; flex-direction: column; align-items: center; border: 1px solid #132247; }
         .metric-val { font-size: 18px; font-weight: bold; margin-bottom: 2px; }
         .metric-lbl { font-size: 8px; color: var(--text-muted); text-transform: uppercase; text-align: center; font-weight: bold; letter-spacing: 0.5px; }
 
-        /* Real-Time Mathematical Comparison Board Window */
         .comparison-window {
             background: #01040f; border: 1px solid #132247; border-radius: 6px;
             padding: 10px; font-size: 11px; text-align: left; margin-bottom: 10px; line-height: 1.4;
         }
-
-        /* High-Visibility Console Terminal Logs (White/Red Text on Black) */
         .terminal-box {
             background: #000000; border: 1px solid #132247; border-radius: 6px;
             padding: 8px; font-size: 10px; font-family: monospace; text-align: left; height: 90px; overflow-y: auto; margin-bottom: 8px;
@@ -85,9 +78,8 @@
 <body>
 
 <div class="phone-frame">
-    <h2>Marduk_F System Gateway</h2>
+    <h2>Marduk_F Satellite Base</h2>
 
-    <!-- GAUGE SEGMENT -->
     <div class="gauge-area">
         <div class="pue-circle">
             <span class="pue-title" id="pueNum">1.24</span>
@@ -95,27 +87,25 @@
         <div class="pue-sub">Power Usage Effectiveness Gauge</div>
     </div>
 
-    <!-- FIXED: UNIFIED SINGLE LINE SELECTOR (Locks active nodes exclusively) -->
+    <!-- SELECTION MATRIX: HARDCODED TO WORK SEPARATELY TO PREVENT DATA OVERLAPS -->
     <div class="source-scroll-container">
-        <label>Active Target Architecture Node</label>
-        <select class="source-select" id="systemNodeSelect" onchange="executeUnifiedNodeShift()">
-            <option value="NASA_LIVE">NASA Satellite Ingest Feed (Open-API Stream)</option>
-            <option value="NOAA_LIVE">NOAA Climate Sensor Ingest Feed (Open-API Stream)</option>
-            <option value="GOOGLE_SYS" selected>Google Corporate Server Cluster Baseline</option>
-            <option value="CHATGPT_SYS">OpenAI ChatGPT Multi-Row Array Cluster</option>
-            <option value="DEEPSEEK_SYS">DeepSeek Large Distributed Inference Bank</option>
+        <label>Isolated Ingest / Target Infrastructure Node</label>
+        <select class="source-select" id="isolatedNode" onchange="switchSatelliteTargetRoute()">
+            <option value="NASA_NODE">NASA Satellite Orbital Feed (Free Space-API)</option>
+            <option value="NOAA_NODE">NOAA Oceanic Atmospheric Ingress (Free Space-API)</option>
+            <option value="GOOGLE_NODE" selected>Google Corporate Server Cluster Target</option>
+            <option value="CHATGPT_NODE">OpenAI ChatGPT Multi-Row Array Infrastructure</option>
+            <option value="DEEPSEEK_NODE">DeepSeek Distributed Inference Bank Matrix</option>
         </select>
     </div>
 
-    <!-- CONTROL HARDWARE BUTTONS -->
-    <button class="btn-main" onclick="triggerStream('start')">▶ Start Green Telemetry</button>
+    <button class="btn-main" onclick="triggerSatelliteStream('start')">▶ Start Green Telemetry</button>
     <div class="btn-row">
-        <button class="btn-probe" onclick="triggerStream('probe')">🔍 Array Probe</button>
-        <button class="btn-stall" onclick="triggerStream('stall')">❚❚ Stall Cores</button>
+        <button class="btn-probe" onclick="triggerSatelliteStream('probe')">🔍 Array Probe</button>
+        <button class="btn-stall" onclick="triggerSatelliteStream('stall')">❚❚ Stall Cores</button>
     </div>
-    <button class="btn-flush" onclick="triggerStream('flush')">■ Flush System</button>
+    <button class="btn-flush" onclick="triggerSatelliteStream('flush')">■ Flush System</button>
 
-    <!-- STATISTICS METRICS MATRIX -->
     <div class="metrics-grid">
         <div class="metric-card">
             <span class="metric-val" id="cyclesVal" style="color:var(--accent-green)">15</span>
@@ -135,52 +125,56 @@
         </div>
     </div>
 
-    <!-- LIVE COMPARISON EFFICIENCY DISPLAY WINDOW -->
+    <!-- REVENUE ENERGY SYSTEM WORKLOAD COMPARISON DISPLAY -->
     <div class="comparison-window">
-        <div style="color:var(--accent-blue); font-weight:bold; margin-bottom:6px; text-transform:uppercase; font-size:10px;">[ENKOMOS / ENLILAÉON CONSUMPTION EQUATION]</div>
-        <div id="savingsMathResult" style="color:var(--text-white); font-size:11px;">Awaiting hardware profile synchronization...</div>
+        <div style="color:var(--accent-blue); font-weight:bold; margin-bottom:6px; text-transform:uppercase; font-size:10px;">[ENKOMOS / ENLILAÉON REVENUE EQUATION]</div>
+        <div id="savingsMathResult" style="color:var(--text-white); font-size:11px;">Awaiting satellite tracking acquisition lock...</div>
     </div>
 
-    <!-- DATA FLOW SCROLLING CONSOLE TERMINAL WINDOW -->
     <div class="terminal-box" id="scrollingTerminal">
         <div class="log-line-w">#14 processing stable outputs.</div>
-        <div class="log-line-w">SOLAR_NODE_X9 &gt; 🔍 Executing Cluster Matrix Core Sweep Parameters...</div>
+        <div class="log-line-w">SOLAR_NODE_X9 &gt; 🛰️ Satellite Transmission Base active. Downlink synchronized.</div>
     </div>
 </div>
 
 <script>
-    let transmissionTimer = null;
+    let streamTimer = null;
     let baselineCycles = 15;
     let accumulatedEnergy = 0.199;
     let accumulatedOpex = 19.90;
-    let localNoisePruned = 57169;
+    let noisePrunedBytes = 57169;
 
     function pushTerminalLine(message, isAlert = false) {
         const consoleBox = document.getElementById('scrollingTerminal');
         const stamp = new Date().toLocaleTimeString();
         const element = document.createElement('div');
         element.className = isAlert ? 'log-line-r' : 'log-line-w';
-        element.innerHTML = `[${stamp}] SOLAR_NODE_X9 &gt; ${message}`;
+        element.innerHTML = `[${stamp}] SPACE_BASE &gt; ${message}`;
         consoleBox.appendChild(element);
         consoleBox.scrollTop = consoleBox.scrollHeight;
     }
 
-    // FIXED: Unified single drop-down handler prevents dual-stream overlaps
-    function executeUnifiedNodeShift() {
-        const node = document.getElementById('systemNodeSelect').value;
-        pushTerminalLine(`Ingestion channel re-mapped exclusively to node: [${node}]`);
+    // SEPARATED WORKLOAD ROUTING MECHANISM
+    function switchSatelliteTargetRoute() {
+        const selectedNode = document.getElementById('isolatedNode').value;
+        pushTerminalLine(`Isolating telemetry lines. Stream targeted exclusively to: [${selectedNode}]`);
         
-        let traditionalFoodLoad = 2.0; 
-        let greenSluiceFoodLoad = 0.2; 
-        let fleetCapExSavings = 85.9;    
+        let traditionalFoodLoad = 2.0; // 2.0kg traditional requirement constant
+        let greenSluiceFoodLoad = 0.2; // 0.2kg optimized Enkomos requirement constant
 
-        if (node === "NASA_LIVE" || node === "NOAA_LIVE") {
-            document.getElementById('shedVal').innerText = "0.0%"; 
+        if (selectedNode === "NASA_NODE" || selectedNode === "NOAA_NODE") {
+            document.getElementById('shedVal').innerText = "0.0%";
             document.getElementById('pueNum').innerText = "1.002";
             document.getElementById('savingsMathResult').innerHTML = `
-                <b>Active Source:</b> Free Open-API Climate Feed Stream<br>
-                <b>System Footprint:</b> Continuous Pass-Through Operation<br>
-                <span style="color:var(--accent-green)"><b>Malicious Overhead:</b> 0% Data Threat Level Checked</span>
+                <b>Space Stream:</b> Active Public Satellite Downlink Channel<br>
+                <b>Data Matrix:</b> In-Memory Pass-Through Active (No Storage)<br>
+                <span style="color:var(--accent-green)"><b>Overlapping Status:</b> SAFE. Isolated from corporate networks.</span>
             `;
         } else {
             document.getElementById('shedVal').innerText = "93.8%";
+            if (selectedNode === "GOOGLE_NODE") document.getElementById('pueNum').innerText = "1.24";
+            else if (selectedNode === "CHATGPT_NODE") document.getElementById('pueNum').innerText = "1.45";
+            else document.getElementById('pueNum').innerText = "1.32";
+
+            document.getElementById('savingsMathResult').innerHTML = `
+                <b>Target Base:</b> ${selectedNode} Core Parameters Mapped<br>
