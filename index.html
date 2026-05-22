@@ -33,14 +33,15 @@
         h2 { text-align: center; font-size: 14px; margin: 0 0 10px; letter-spacing: 1px; color: var(--accent-blue); text-transform: uppercase; }
         
         /* Unified Dropdown Scrolling Matrix Section */
+        .metrics-grid-selectors { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
         .source-scroll-container {
             background: var(--panel-navy); padding: 8px; border-radius: 8px;
-            margin-bottom: 10px; border: 1px solid #132247; text-align: left;
+            border: 1px solid #132247; text-align: left;
         }
-        .source-scroll-container label { font-size: 9px; color: var(--accent-blue); font-weight: bold; display: block; margin-bottom: 4px; text-transform: uppercase; }
+        .source-scroll-container label { font-size: 8px; color: var(--accent-blue); font-weight: bold; display: block; margin-bottom: 4px; text-transform: uppercase; }
         .source-select {
             width: 100%; background: #01040a; color: #fff; border: 1px solid #1f2d5a;
-            padding: 6px; border-radius: 4px; font-family: monospace; font-size: 11px; cursor: pointer;
+            padding: 6px; border-radius: 4px; font-family: monospace; font-size: 10px; cursor: pointer;
         }
 
         /* Gauge Area */
@@ -70,7 +71,7 @@
         /* Real-Time Mathematical Comparison Board Window */
         .comparison-window {
             background: #01040f; border: 1px solid #132247; border-radius: 6px;
-            padding: 8px; font-size: 11px; text-align: left; margin-bottom: 10px; line-height: 1.4;
+            padding: 10px; font-size: 11px; text-align: left; margin-bottom: 10px; line-height: 1.4;
         }
 
         /* High-Visibility Console Terminal Logs (White/Red Text on Black) */
@@ -80,9 +81,6 @@
         }
         .log-line-w { color: var(--text-white); margin-bottom: 2px; }
         .log-line-r { color: var(--accent-red); margin-bottom: 2px; font-weight: bold; }
-        
-        /* Green Status Bar for Green Energy Configuration */
-        .green-energy-strip { background: var(--accent-green); color: #000000; padding: 6px; border-radius: 4px; font-size: 10px; font-weight: bold; text-align: center; margin-top: auto; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -99,15 +97,15 @@
     </div>
 
     <!-- SELECTION MATRIX DROP-DOWN MENUS -->
-    <div class="metrics-grid" style="margin-bottom: 6px; gap: 6px;">
-        <div class="source-scroll-container" style="margin-bottom: 0;">
+    <div class="metrics-grid-selectors">
+        <div class="source-scroll-container">
             <label>1. Telemetry Ingress Feed</label>
-            <select class="source-select" id="freeApi">
-                <option value="NASA">NASA Satellite Stream</option>
-                <option value="NOAA">NOAA Climate Stream</option>
+            <select class="source-select" id="freeApi" onchange="runComparisonMatrixMath()">
+                <option value="NASA">NASA Satellite Feed</option>
+                <option value="NOAA">NOAA Climate Feed</option>
             </select>
         </div>
-        <div class="source-scroll-container" style="margin-bottom: 0;">
+        <div class="source-scroll-container">
             <label>2. Corporate Target Baseline</label>
             <select class="source-select" id="corporateBaseline" onchange="runComparisonMatrixMath()">
                 <option value="GOOGLE">Google Cluster</option>
@@ -147,19 +145,14 @@
 
     <!-- LIVE COMPARISON EFFICIENCY DISPLAY WINDOW -->
     <div class="comparison-window">
-        <div style="color:var(--accent-blue); font-weight:bold; margin-bottom:4px; text-transform:uppercase; font-size:10px;">[ENKOMOS / ENLILAÉON CONSUMPTION EQUATION]</div>
-        <div id="savingsMathResult" style="color:var(--accent-yellow); font-size:11px;">Loading analog target baseline tracking...</div>
+        <div style="color:var(--accent-blue); font-weight:bold; margin-bottom:6px; text-transform:uppercase; font-size:10px;">[ENKOMOS / ENLILAÉON CONSUMPTION EQUATION]</div>
+        <div id="savingsMathResult" style="color:var(--text-white); font-size:11px;">Calculating metrics arrays...</div>
     </div>
 
     <!-- DATA FLOW SCROLLING CONSOLE TERMINAL WINDOW -->
     <div class="terminal-box" id="scrollingTerminal">
         <div class="log-line-w">#14 processing stable outputs.</div>
         <div class="log-line-w">SOLAR_NODE_X9 &gt; 🔍 Executing DeepSeek-V3 Matrix Core sweep... All cluster parameters</div>
-    </div>
-
-    <!-- GREEN ENERGY STATUS BAR -->
-    <div class="green-energy-strip" id="financialBanner">
-        Green Energy Matrix: Mitra SSP + VWT Fibonacci Enabled
     </div>
 </div>
 
@@ -180,6 +173,7 @@
         consoleBox.scrollTop = consoleBox.scrollHeight;
     }
 
+    // FIXED: Formulates your specific 3-stage thermodynamic analog power comparison equations
     function runComparisonMatrixMath() {
         const targetSelection = document.getElementById('corporateBaseline').value;
         const apiSelection = document.getElementById('freeApi').value;
@@ -187,3 +181,11 @@
         
         if (targetSelection === "GOOGLE") baselineCostKw = 45000;
         else if (targetSelection === "CHATGPT") baselineCostKw = 120000;
+        else baselineCostKw = 85000;
+
+        let traditionalFoodLoad = 2.0; // 2.0kg food energy load to run 12km
+        let greenSluiceFoodLoad = 0.2; // 0.2kg food energy load to run 12km
+        let fleetCapExSavings = 85.9;    
+
+        // Updates the comparison display panel dynamically with no freeze states
+        document.getElementById('savingsMathResult').innerHTML = `
