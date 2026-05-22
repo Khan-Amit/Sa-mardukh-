@@ -1,8 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SA MARDUK_F COMMAND MATRIX</title>
+    <style>
+        :root {
+            --bg-midnight: #020613;
+            --panel-navy: #081229;
+            --accent-blue: #1c64f2;
+            --accent-yellow: #e3a008;
+            --accent-green: #00cc88;
+            --accent-red: #e02424;
+            --text-white: #ffffff;
+            --text-muted: #6b7280;
+        }
+        body {
+            background-color: var(--bg-midnight);
+            color: var(--text-white);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0; padding: 10px;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh;
+        }
+        /* Mobile System Interface Container - Matches Your Layout Metrics Exactly */
+        .phone-frame {
+            width: 360px; height: 780px;
+            background: #000000; border-radius: 20px;
+            display: flex; flex-direction: column; padding: 15px; box-sizing: border-box;
+            overflow-y: auto; border: 4px solid #1f293d;
+        }
+        h2 { text-align: center; font-size: 14px; margin: 0 0 10px; letter-spacing: 1px; color: var(--accent-blue); text-transform: uppercase; }
+        
+        /* Unified Dropdown Scrolling Matrix Section */
+        .source-scroll-container {
+            background: var(--panel-navy); padding: 8px; border-radius: 8px;
+            margin-bottom: 10px; border: 1px solid #132247; text-align: left;
+        }
+        .source-scroll-container label { font-size: 9px; color: var(--accent-blue); font-weight: bold; display: block; margin-bottom: 4px; text-transform: uppercase; }
+        .source-select {
+            width: 100%; background: #01040a; color: #fff; border: 1px solid #1f2d5a;
+            padding: 6px; border-radius: 4px; font-family: monospace; font-size: 11px; cursor: pointer;
+        }
+
+        /* Gauge Area */
+        .gauge-area { display: flex; flex-direction: column; align-items: center; margin-bottom: 10px; }
+        .pue-circle {
+            width: 130px; height: 130px; border-radius: 50%;
+            border: 6px solid var(--accent-yellow); border-top-color: var(--accent-blue);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; background: #000;
+        }
+        .pue-title { font-size: 26px; font-weight: bold; color: var(--text-white); }
+        .pue-sub { font-size: 8px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; text-align: center; }
+
+        /* Interface Control Buttons Layer */
+        .btn-main { width: 100%; background: var(--accent-green); color: #000; padding: 12px; font-size: 13px; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .btn-row { display: flex; gap: 8px; margin-bottom: 8px; }
+        .btn-row button { flex: 1; padding: 11px; font-size: 12px; font-weight: bold; border: none; border-radius: 6px; color: #fff; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; }
+        .btn-probe { background: var(--accent-yellow); color: #000 !important; }
+        .btn-stall { background: var(--accent-blue); }
+        .btn-flush { width: 100%; background: var(--accent-red); color: #fff; padding: 10px; font-size: 12px; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; margin-bottom: 10px; text-transform: uppercase; }
+
+        /* Statistics Metrics Grid Blocks */
+        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+        .metric-card { background: var(--panel-navy); border-radius: 6px; padding: 10px; display: flex; flex-direction: column; align-items: center; border: 1px solid #132247; }
+        .metric-val { font-size: 18px; font-weight: bold; margin-bottom: 2px; }
+        .metric-lbl { font-size: 8px; color: var(--text-muted); text-transform: uppercase; text-align: center; font-weight: bold; letter-spacing: 0.5px; }
+
+        /* Real-Time Mathematical Comparison Board Window */
+        .comparison-window {
+            background: #01040f; border: 1px solid #132247; border-radius: 6px;
+            padding: 8px; font-size: 11px; text-align: left; margin-bottom: 10px; line-height: 1.4;
+        }
+
+        /* High-Visibility Console Terminal Logs (White/Red Text on Black) */
+        .terminal-box {
+            background: #000000; border: 1px solid #132247; border-radius: 6px;
+            padding: 8px; font-size: 10px; font-family: monospace; text-align: left; height: 90px; overflow-y: auto; margin-bottom: 8px;
+        }
+        .log-line-w { color: var(--text-white); margin-bottom: 2px; }
+        .log-line-r { color: var(--accent-red); margin-bottom: 2px; font-weight: bold; }
+        
+        /* Green Status Bar for Green Energy Configuration */
+        .green-energy-strip { background: var(--accent-green); color: #000000; padding: 6px; border-radius: 4px; font-size: 10px; font-weight: bold; text-align: center; margin-top: auto; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+<div class="phone-frame">
+    <h2>Marduk_F System Gateway</h2>
+
+    <!-- GAUGE SEGMENT -->
+    <div class="gauge-area">
+        <div class="pue-circle">
+            <span class="pue-title" id="pueNum">1.24</span>
+        </div>
+        <div class="pue-sub">Power Usage Effectiveness Gauge</div>
+    </div>
+
+    <!-- SELECTION MATRIX DROP-DOWN MENUS -->
+    <div class="metrics-grid" style="margin-bottom: 6px; gap: 6px;">
+        <div class="source-scroll-container" style="margin-bottom: 0;">
+            <label>1. Telemetry Ingress Feed</label>
+            <select class="source-select" id="freeApi">
+                <option value="NASA">NASA Satellite Stream</option>
+                <option value="NOAA">NOAA Climate Stream</option>
+            </select>
+        </div>
+        <div class="source-scroll-container" style="margin-bottom: 0;">
+            <label>2. Corporate Target Baseline</label>
+            <select class="source-select" id="corporateBaseline" onchange="runComparisonMatrixMath()">
+                <option value="GOOGLE">Google Cluster</option>
+                <option value="CHATGPT">ChatGPT Array</option>
+                <option value="DEEPSEEK" selected>DeepSeek Node</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- CONTROL HARDWARE BUTTONS -->
+    <button class="btn-main" onclick="triggerStream('start')">▶ Start Green Telemetry</button>
+    <div class="btn-row">
+        <button class="btn-probe" onclick="triggerStream('probe')">🔍 Array Probe</button>
+        <button class="btn-stall" onclick="triggerStream('stall')">❚❚ Stall Cores</button>
+    </div>
+    <button class="btn-flush" onclick="triggerStream('flush')">■ Flush System</button>
+
+    <!-- STATISTICS METRICS MATRIX -->
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <span class="metric-val" id="cyclesVal" style="color:var(--accent-green)">15</span>
+            <span class="metric-lbl">Telemetry Cycles</span>
+        </div>
+        <div class="metric-card">
+            <span class="metric-val" id="shedVal" style="color:var(--accent-red)">93.8%</span>
+            <span class="metric-lbl">Workload Shed Rate</span>
+        </div>
+        <div class="metric-card">
+            <span class="metric-val" id="energyVal" style="color:var(--accent-blue)">0.199</span>
+            <span class="metric-lbl">Energy Used (MWh)</span>
+        </div>
+        <div class="metric-card">
+            <span class="metric-val" id="opexVal" style="color:var(--accent-yellow)">$19.90</span>
+            <span class="metric-lbl">OpEx Savings (USD)</span>
+        </div>
+    </div>
+
+    <!-- LIVE COMPARISON EFFICIENCY DISPLAY WINDOW -->
+    <div class="comparison-window">
+        <div style="color:var(--accent-blue); font-weight:bold; margin-bottom:4px; text-transform:uppercase; font-size:10px;">[ENKOMOS / ENLILAÉON CONSUMPTION EQUATION]</div>
+        <div id="savingsMathResult" style="color:var(--accent-yellow); font-size:11px;">Loading analog target baseline tracking...</div>
+    </div>
+
+    <!-- DATA FLOW SCROLLING CONSOLE TERMINAL WINDOW -->
+    <div class="terminal-box" id="scrollingTerminal">
+        <div class="log-line-w">#14 processing stable outputs.</div>
+        <div class="log-line-w">SOLAR_NODE_X9 &gt; 🔍 Executing DeepSeek-V3 Matrix Core sweep... All cluster parameters</div>
+    </div>
+
+    <!-- GREEN ENERGY STATUS BAR -->
+    <div class="green-energy-strip" id="financialBanner">
+        Green Energy Matrix: Mitra SSP + VWT Fibonacci Enabled
+    </div>
+</div>
+
 <script>
     let transmissionTimer = null;
-    let fallbackCycles = 15;
-    let fallbackEnergy = 0.199;
-    let fallbackOpex = 19.90;
+    let baselineCycles = 15;
+    let accumulatedEnergy = 0.199;
+    let accumulatedOpex = 19.90;
+    let localNoisePruned = 57169;
 
     function pushTerminalLine(message, isAlert = false) {
         const consoleBox = document.getElementById('scrollingTerminal');
@@ -14,77 +180,10 @@
         consoleBox.scrollTop = consoleBox.scrollHeight;
     }
 
-    function switchSourceProfile() {
-        const sourceSelection = document.getElementById('unifiedSource').value;
-        pushTerminalLine(`Shifting ingestion routers directly to target node: [${sourceSelection}]`);
+    function runComparisonMatrixMath() {
+        const targetSelection = document.getElementById('corporateBaseline').value;
+        const apiSelection = document.getElementById('freeApi').value;
+        let baselineCostKw = 0;
         
-        // Parameter mapping based on selected dropdown source configurations
-        if (sourceSelection === "NASA" || sourceSelection === "NOAA") {
-            document.getElementById('shedVal').innerText = "0.0%"; 
-            document.getElementById('pueNum').innerText = "1.002";
-        } else if (sourceSelection === "GOOGLE") {
-            document.getElementById('shedVal').innerText = "45.2%";
-            document.getElementById('pueNum').innerText = "1.12";
-        } else if (sourceSelection === "CHATGPT") {
-            document.getElementById('shedVal').innerText = "88.4%";
-            document.getElementById('pueNum').innerText = "1.45";
-        } else {
-            document.getElementById('shedVal').innerText = "93.8%";
-            document.getElementById('pueNum').innerText = "1.24";
-        }
-    }
-
-    function triggerStream(action) {
-        if (action === 'start') {
-            pushTerminalLine("Activating three-stage Sluice-Benches... Beginning real-time loop.");
-            if (transmissionTimer) clearInterval(transmissionTimer);
-            
-            transmissionTimer = setInterval(() => {
-                // Poll metrics from the active three-stage C supervisor server loop
-                fetch('http://127.0.0')
-                    .then(res => res.json())
-                    .then(data => {
-                        // Dynamically map incoming data parameters directly to dashboard elements
-                        document.getElementById('pueNum').innerText = data.pue.toFixed(2);
-                        document.getElementById('cyclesVal').innerText = data.cycles;
-                        document.getElementById('shedVal').innerText = data.shed_rate.toFixed(1) + "%";
-                        document.getElementById('energyVal').innerText = data.energy.toFixed(3);
-                        document.getElementById('opexVal').innerText = "$" + data.opex.toFixed(2);
-                        pushTerminalLine("Stage 3 Exit Sluice complete: Telemetry variables updated successfully.");
-                    })
-                    .catch(() => {
-                        // In-Memory Local Loopback Emulation Mode (Bypasses security port drops safely)
-                        fallbackCycles += 1;
-                        fallbackEnergy += 0.014;
-                        fallbackOpex += 1.85;
-                        
-                        document.getElementById('cyclesVal').innerText = fallbackCycles;
-                        document.getElementById('energyVal').innerText = fallbackEnergy.toFixed(3);
-                        document.getElementById('opexVal').innerText = "$" + fallbackOpex.toFixed(2);
-                        
-                        if (fallbackCycles % 4 === 0) {
-                            document.getElementById('pueNum').innerText = "1.01";
-                            document.getElementById('shedVal').innerText = "0.0%";
-                            pushTerminalLine("REAR SLUICE > Enkomos Green Energy conversion active: Power consumption dropped.", false);
-                        } else {
-                            document.getElementById('pueNum').innerText = "1.24";
-                            document.getElementById('shedVal').innerText = "93.8%";
-                            pushTerminalLine("FRONT SLUICE > Intercepted and pruned heavy network traffic surge.", true);
-                        }
-                    });
-            }, 1000);
-        } else if (action === 'stall') {
-            if (transmissionTimer) { clearInterval(transmissionTimer); transmissionTimer = null; }
-            pushTerminalLine("CORE STALL ENGAGED. System running in air-gapped standby mode.", true);
-            fetch('http://127.0.0', { method: 'POST' }).catch(() => {});
-        } else if (action === 'flush') {
-            pushTerminalLine("Wiping all active local cache memory lines cleanly...", true);
-            document.getElementById('cyclesVal').innerText = "0";
-            document.getElementById('energyVal').innerText = "0.000";
-            document.getElementById('opexVal').innerText = "$0.00";
-            fallbackCycles = 0; fallbackEnergy = 0.0; fallbackOpex = 0.0;
-        } else if (action === 'probe') {
-            pushTerminalLine("PROBE > Running diagnostic pass across internal hardware array registers...");
-        }
-    }
-</script>
+        if (targetSelection === "GOOGLE") baselineCostKw = 45000;
+        else if (targetSelection === "CHATGPT") baselineCostKw = 120000;
