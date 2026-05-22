@@ -1,0 +1,22 @@
+/* Marduk_F Architecture Style Sheet Layout */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #000000;
+}
+::-webkit-scrollbar-thumb {
+    background: #16223f;
+    border-radius: 3px;
+}
+select:focus, button:focus {
+    outline: 1px solid var(--dial-blue);
+}
+.phone-frame::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+    z-index: 10;
+}
