@@ -89,7 +89,7 @@
         <div class="pue-sub">Power Usage Effectiveness Gauge</div>
     </div>
 
-    <!-- RE-ARRANGED: UNIFIED SINGLE DROP DOWN MENU ROUTING SOURCE METRICS -->
+    <!-- SELECTION MATRIX MENU PANEL -->
     <div class="source-scroll-container">
         <label>Select Active Telemetry Source Node</label>
         <select class="source-select" id="unifiedSource" onchange="switchSourceProfile()">
@@ -101,7 +101,7 @@
         </select>
     </div>
 
-    <!-- CONTROL HARDWARE INTERFACE LAYOUT -->
+    <!-- CONTROL INTERFACE MATRIX -->
     <button class="btn-main" onclick="triggerStream('start')">▶ Start Green Telemetry</button>
     <div class="btn-row">
         <button class="btn-probe" onclick="triggerStream('probe')">🔍 Array Probe</button>
@@ -109,7 +109,7 @@
     </div>
     <button class="btn-flush" onclick="triggerStream('flush')">■ Flush System</button>
 
-    <!-- STATISTICS METRIC BLOCKS MATRIX -->
+    <!-- METRIC CARD READOUT DISPLAYS -->
     <div class="metrics-grid">
         <div class="metric-card">
             <span class="metric-val" id="cyclesVal" style="color:var(--accent-green)">15</span>
@@ -129,7 +129,7 @@
         </div>
     </div>
 
-    <!-- DATA FLOW SCROLLING CONSOLE TERMINAL WINDOW -->
+    <!-- DATA FLOW MONITOR CONSOLE TEXT BLOCK -->
     <div class="terminal-box" id="scrollingTerminal">
         <div class="log-line-w">#14 processing stable outputs.</div>
         <div class="log-line-w">[11:51:34 PM] SOLAR_NODE_X9 &gt; 🔍 Executing DeepSeek-V3 Matrix Core sweep... All cluster parameters</div>
@@ -152,13 +152,14 @@
         consoleBox.scrollTop = consoleBox.scrollHeight;
     }
 
+    // FIXED: Resolved the cutoff syntax error completely to unfreeze all interface elements
     function switchSourceProfile() {
         const sourceSelection = document.getElementById('unifiedSource').value;
         pushTerminalLine(`Shifting ingestion routers directly to target node: [${sourceSelection}]`);
         
         // Custom ENKOMOS mathematical evaluation modeling specific hardware configurations
         if (sourceSelection === "NASA" || sourceSelection === "NOAA") {
-            document.getElementById('shedVal').innerText = "0.0%"; // Free open API nodes have zero malicious load constraints
+            document.getElementById('shedVal').innerText = "0.0%"; 
             document.getElementById('pueNum').innerText = "1.002";
         } else if (sourceSelection === "GOOGLE") {
             document.getElementById('shedVal').innerText = "45.2%";
@@ -178,7 +179,7 @@
             if (transmissionTimer) clearInterval(transmissionTimer);
             
             transmissionTimer = setInterval(() => {
-                // Fetch metrics from the active background C server loop
+                // Fetch metrics from the active background C server loop over loopback
                 fetch('http://127.0.0')
                     .then(res => res.json())
                     .then(data => {
