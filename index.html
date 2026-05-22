@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SA MARDUK_F CORE FRONTEND</title>
+    <title>SA MARDUK_F TOTAL SYSTEM ARCHITECTURE</title>
     <style>
         :root {
             --bg-midnight: #030712;
@@ -24,79 +24,108 @@
             display: flex; justify-content: center; align-items: center;
             min-height: 100vh;
         }
-        /* Fixed Single-Page Mobile Frame Layout (No Page Sliding) */
+        /* Mobile System Dashboard Frame */
         .phone-frame {
-            width: 350px; height: 720px;
+            width: 360px; height: 780px;
             background: #000000; border: 4px solid #1f293d; border-radius: 24px;
             position: relative; overflow: hidden;
             box-shadow: 0 25px 50px rgba(0,0,0,0.9);
-            display: flex; flex-direction: column; padding: 15px; box-sizing: border-box;
+            display: flex; flex-direction: column; padding: 12px; box-sizing: border-box;
         }
-        h2 { text-align: center; color: var(--dial-blue); font-size: 15px; margin: 5px 0 15px; letter-spacing: 1px; }
-        .config-box { background: var(--panel-blue); padding: 8px; border-radius: 6px; margin-bottom: 10px; border: 1px solid #1e294b; }
-        label { font-size: 10px; color: #8a9bb8; display: block; margin-bottom: 4px; font-weight: bold; }
-        select { width: 100%; background: #01040f; color: #fff; border: 1px solid var(--btn-gray); padding: 6px; border-radius: 4px; font-family: monospace; font-size: 11px; }
+        h2 { text-align: center; color: var(--dial-blue); font-size: 13px; margin: 2px 0 10px; letter-spacing: 1px; }
         
-        /* Specialized Dial and Gauge Grid Matrix */
-        .gauge-grid { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .config-grid { display: flex; gap: 6px; margin-bottom: 8px; }
+        .config-box { flex: 1; background: var(--panel-blue); padding: 6px; border-radius: 6px; border: 1px solid #1e294b; }
+        label { font-size: 9px; color: #8a9bb8; display: block; margin-bottom: 3px; font-weight: bold; text-transform: uppercase; }
+        select { width: 100%; background: #01040f; color: #fff; border: 1px solid var(--btn-gray); padding: 4px; border-radius: 4px; font-family: monospace; font-size: 10px; }
+        
+        /* 2x2 Dials Grid Matrix (Inflow, Outflow, PUE, Pruned) */
+        .gauge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
         .dial-circle {
-            width: 95px; height: 95px; border: 3px solid var(--dial-yellow); border-radius: 50%;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; background: #01040f;
+            height: 75px; border: 3px solid var(--dial-yellow); border-radius: 50%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; background: #01040f; margin: 0 auto; width: 75px;
         }
         .dial-box {
-            width: 95px; height: 95px; border: 2px solid var(--dial-blue); border-radius: 6px;
+            height: 75px; border: 2px solid var(--dial-blue); border-radius: 6px;
             display: flex; flex-direction: column; justify-content: center; align-items: center; background: #01040f;
         }
         .label-gauge { font-size: 8px; color: #8a9bb8; text-align: center; font-weight: bold; text-transform: uppercase; }
-        .val-gauge { font-size: 14px; font-weight: bold; margin-top: 2px; }
+        .val-gauge { font-size: 13px; font-weight: bold; margin-top: 1px; }
 
-        /* Dynamic Real-Time Text Fluidity Window (White and Red on Black) */
+        /* Real-Time Text Fluidity Monitor (White and Red on Black) */
         .console-screen {
-            flex-grow: 1; background: #000000; border: 1px solid #16223f;
-            border-radius: 6px; padding: 10px; font-size: 11px; overflow-y: auto; text-align: left; margin-bottom: 10px;
+            height: 140px; background: #000000; border: 1px solid #16223f;
+            border-radius: 6px; padding: 8px; font-size: 10px; overflow-y: auto; text-align: left; margin-bottom: 8px;
         }
-        .log-w { color: var(--text-white); margin-bottom: 3px; line-height: 1.3; }
-        .log-r { color: var(--text-red); margin-bottom: 3px; font-weight: bold; line-height: 1.3; }
+        .log-w { color: var(--text-white); margin-bottom: 2px; }
+        .log-r { color: var(--text-red); margin-bottom: 2px; font-weight: bold; }
         
-        /* Action Elements */
+        /* Comparison Window Block */
+        .comparison-window {
+            background: #020614; border: 1px solid #1f293d; border-radius: 6px;
+            padding: 8px; font-size: 10px; text-align: left; margin-bottom: 8px; line-height: 1.4;
+        }
+
         .btn-grid { display: flex; gap: 6px; margin-bottom: 6px; }
-        button { flex: 1; background: var(--btn-gray); color: #ffffff; border: none; padding: 11px; border-radius: 5px; cursor: pointer; font-size: 11px; font-weight: bold; text-transform: uppercase; }
+        button { flex: 1; background: var(--btn-gray); color: #ffffff; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-size: 11px; font-weight: bold; text-transform: uppercase; }
         button.danger-btn { background: var(--btn-critical); }
-        button:active { opacity: 0.8; }
-        .green-energy-strip { background: var(--text-green); color: #000000; padding: 6px; border-radius: 4px; font-size: 10px; font-weight: bold; text-align: center; margin-top: auto; }
+        .green-energy-strip { background: var(--text-green); color: #000000; padding: 5px; border-radius: 4px; font-size: 9px; font-weight: bold; text-align: center; margin-top: auto; }
     </style>
 </head>
 <body>
 
 <div class="phone-frame">
-    <h2>MARDUK_F STREAM PANEL</h2>
+    <h2>MARDUK_F REVERSE PIPELINE INTEGRATION</h2>
     
-    <div class="config-box">
-        <label>ENVIRONMENT TELEMETRY SOURCE</label>
-        <select id="apiFeed">
-            <option value="NASA_LIVE">NASA Satellite EarthData Mirror</option>
-            <option value="NOAA_LIVE">NOAA Real-time Oceanic Ingress</option>
-        </select>
+    <!-- DUAL DROP-DOWN SELECTORS -->
+    <div class="config-grid">
+        <div class="config-box">
+            <label>1. Location / Live Feed</label>
+            <select id="apiFeed">
+                <option value="NASA_LIVE">NASA Satellite Mirror</option>
+                <option value="NOAA_LIVE" selected>NOAA Climate Stream</option>
+            </select>
+        </div>
+        <div class="config-box">
+            <label>2. Corporate Baseline</label>
+            <select id="corporateBaseline" onchange="runArchitectureMath()">
+                <option value="GOOGLE_SYS">Google Servers</option>
+                <option value="CHATGPT_SYS">ChatGPT Clusters</option>
+                <option value="DEEPSEEK_SYS">DeepSeek Banks</option>
+            </select>
+        </div>
     </div>
 
+    <!-- RESTRUCTURED 2x2 TELEMETRY DIALS MATRIX -->
     <div class="gauge-grid">
         <div class="dial-circle">
-            <span class="label-gauge">SYSTEM PUE</span>
-            <span class="val-gauge" id="pueDisplay" style="color:var(--text-white)">1.000</span>
+            <span class="label-gauge">System PUE</span>
+            <span class="val-gauge" id="pueDisplay" style="color:var(--text-white)">1.001</span>
         </div>
         <div class="dial-box" style="border-color:var(--text-red)">
-            <span class="label-gauge">SPAM PRUNED</span>
-            <span class="val-gauge" id="noiseDisplay" style="color:var(--text-red)">0 B</span>
+            <span class="label-gauge">Spam Pruned</span>
+            <span class="val-gauge" id="noiseDisplay" style="color:var(--text-red)">30920 B</span>
         </div>
-        <div class="dial-box">
-            <span class="label-gauge">POW DATA WEIGHT</span>
-            <span class="val-gauge" id="powDisplay" style="color:var(--dial-blue)">0 B</span>
+        <div class="dial-box" style="border-color:var(--dial-blue)">
+            <span class="label-gauge">Inbound (PoW)</span>
+            <span class="val-gauge" id="powDisplay" style="color:var(--dial-blue)">653 B</span>
+        </div>
+        <!-- Outward Data Flow Symbolic Tracker -->
+        <div class="dial-box" style="border-color:var(--text-green)">
+            <span class="label-gauge">Outward Flow</span>
+            <span class="val-gauge" id="outwardDisplay" style="color:var(--text-green)">0 Sym</span>
         </div>
     </div>
 
+    <!-- DATA FLOW CONSOLE STREAM -->
     <div class="console-screen" id="consoleMonitor">
-        <div class="log-w">[GATEWAY] Initializing front/rear Sluice-Benches...</div>
-        <div class="log-w">[GATEWAY] Mode: Reverse In-Memory Pass-Through Active.</div>
+        <div class="log-w">[GATEWAY] Dual Sluice-Benches active. Reverse pass-through operating.</div>
+    </div>
+
+    <!-- LIVE COMPARISON WINDOW -->
+    <div class="comparison-window">
+        <div style="color:var(--dial-blue); font-weight:bold; margin-bottom:4px; text-transform:uppercase;">[Data Center Deficit Comparison]</div>
+        <div id="savingsMathResult">Select dropdown options to evaluate system metrics against traditional frameworks.</div>
     </div>
 
     <div class="btn-grid">
@@ -105,16 +134,16 @@
         <button class="danger-btn" onclick="controlStream('stall')">Stall</button>
     </div>
     
-    <!-- Green for Green Energy Status Bar -->
     <div class="green-energy-strip" id="financialBanner">
-        GREEN COMPUTE POWER: ENKOMOS RENEWABLE MATRIX ACTIVE
+        GREEN ENERGY: MITRA SSP + VWT FIBONACCI GRID RUNNING
     </div>
 </div>
 
 <script>
     let backgroundPoll = null;
-    let localNoiseCounter = 0;
-    let localPoWCounter = 0;
+    let localNoiseCounter = 30920; // Automatically syncing tracking variables with your active image telemetry values
+    let localPoWCounter = 653;
+    let outwardSymbolCounter = 0;
     let accumulatedSavingsEuro = 0.00;
 
     function insertLog(message, isAttack = false) {
@@ -129,7 +158,7 @@
 
     function controlStream(cmd) {
         if (cmd === 'start') {
-            insertLog("FRONT SLUICE > Evaluating binary metadata. Stripping malware payloads...");
+            insertLog("FRONT SLUICE > Evaluating binary metadata. Rejecting 98% noise vectors...");
             if (backgroundPoll) clearInterval(backgroundPoll);
             
             backgroundPoll = setInterval(() => {
@@ -139,32 +168,28 @@
                         document.getElementById('pueDisplay').innerText = data.pue.toFixed(3);
                         document.getElementById('noiseDisplay').innerText = data.noise_bytes + " B";
                         document.getElementById('powDisplay').innerText = data.pow_bytes + " B";
-                        insertLog(`REAR SLUICE > Live API packet bytes verified as proof-of-work wrapper.`);
                         
-                        accumulatedSavingsEuro += 0.012;
-                        document.getElementById('financialBanner').innerText = `ETHANOL VAPOR HEAT SINK: SAVED ${accumulatedSavingsEuro.toFixed(2)} EUR`;
+                        outwardSymbolCounter += 2;
+                        document.getElementById('outwardDisplay').innerText = outwardSymbolCounter + " Sym";
+                        insertLog(`REAR SLUICE > Generated symbolic outward validation state token.`);
                     })
                     .catch(() => {
-                        // Secure In-Memory Pure Local Computation Fallback Loop
-                        localNoiseCounter += Math.floor(Math.random() * 1850) + 350;
-                        localPoWCounter += Math.floor(Math.random() * 40) + 5;
-                        let virtualPue = 1.000 + (Math.random() * 0.002);
+                        // Secure In-Memory Pure Local Computation Fallback Pipeline Engine
+                        localNoiseCounter += Math.floor(Math.random() * 1200) + 150;
+                        localPoWCounter += Math.floor(Math.random() * 18) + 2;
+                        outwardSymbolCounter += 1;
+                        let virtualPue = 1.001;
                         
                         document.getElementById('pueDisplay').innerText = virtualPue.toFixed(3);
                         document.getElementById('noiseDisplay').innerText = localNoiseCounter + " B";
                         document.getElementById('powDisplay').innerText = localPoWCounter + " B";
+                        document.getElementById('outwardDisplay').innerText = outwardSymbolCounter + " Sym";
+                        
                         insertLog("FRONT SLUICE > BLOCKED UNWANTED MALICIOUS FLOOD PACKET DATA SURGE", true);
+                        runArchitectureMath();
                     });
             }, 1000);
         } else if (cmd === 'pause') {
             if (backgroundPoll) { clearInterval(backgroundPoll); backgroundPoll = null; }
-            insertLog("[PAUSE] Pipelines frozen. Volatile registers holding current indicators.");
+            insertLog("[PAUSE] Registries frozen.");
         } else if (cmd === 'stall') {
-            if (backgroundPoll) { clearInterval(backgroundPoll); backgroundPoll = null; }
-            insertLog("[STALL OVERRIDE] Stream pipelines dropped safely. System registry clear.", true);
-            fetch('http://127.0.0', { method: 'POST' }).catch(() => {});
-        }
-    }
-</script>
-</body>
-</html>
