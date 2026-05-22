@@ -7,89 +7,100 @@
 #include <arpa/inet.h>
 #include <errno.h>
 
-#define SAT_STREAM_HOST "earthquake.usgs.gov"
-#define SAT_STREAM_PORT 80
-#define MARDUK_CORE_PORT 8082
-#define VOLATILE_BUFFER_SIZE 4096
+// 100% Free, Public, and Unauthenticated Real-World Global API Nodes
+#define NASA_NOAA_MIRROR_HOST "earthquake.usgs.gov"
+#define REMOTE_HTTP_PORT     80
+#define LOCAL_SLUICE_PORT    8082
+#define INGEST_BUFFER_SIZE   4096
 
 int main(void) {
-    int sat_socket, local_core_socket;
-    struct hostent *satellite_host;
-    struct sockaddr_in satellite_addr, local_core_addr;
+    int remote_net_fd, local_sluice_fd;
+    struct hostent *dns_record;
+    struct sockaddr_in remote_server_addr, local_core_addr;
 
-    // Production HTTP/1.1 Frame explicitly designed for orbital telemetry extraction mirrors
-    char downlink_request[] = 
+    // Production-Grade HTTP/1.1 Request Payload Frame
+    // Valid headers ensure the public CDN does not drop your cell phone network requests with a 403 error
+    char live_api_request[] = 
         "GET /earthquakes/feed/v1.0/summary/all_hour.geojson HTTP/1.1\r\n"
         "Host: earthquake.usgs.gov\r\n"
-        "User-Agent: MardukSatelliteDownlinkBase/3.0 (Space-Ingress Node)\r\n"
+        "User-Agent: SaliimAhmedCollector/3.0 (Unix; Standard Mobile Network Pipeline)\r\n"
         "Accept: application/json\r\n"
         "Connection: close\r\n\r\n";
 
     printf("====================================================\n");
-    printf("     SA-MARDUKH SATELLITE TRANSMISSION DOWNLINK     \n");
+    printf("     MARDUK_F REAL-WORLD INTERNET DATA COLLECTOR    \n");
     printf("====================================================\n");
 
     while (1) {
-        printf("[Satellite Ingress] Syncing DNS orbital path for: %s...\n", SAT_STREAM_HOST);
-        satellite_host = gethostbyname(SAT_STREAM_HOST);
-        if (satellite_host == NULL) {
+        printf("[Internet Ingress] Resolving public live feed domain: %s...\n", NASA_NOAA_MIRROR_HOST);
+        
+        dns_record = gethostbyname(NASA_NOAA_MIRROR_HOST);
+        if (dns_record == NULL) {
+            fprintf(stderr, "[Network Delay] DNS lookup failed. Device offline or recycling. Retrying in 5s...\n");
             sleep(5);
             continue;
         }
 
-        sat_socket = socket(AF_INET, SOCK_STREAM, 0);
-        if (sat_socket < 0) { sleep(2); continue; }
+        // 1. Open standard TCP network interface socket line to the public web
+        remote_net_fd = socket(AF_INET, SOCK_STREAM, 0);
+        if (remote_net_fd < 0) {
+            sleep(2);
+            continue;
+        }
 
-        memset(&satellite_addr, 0, sizeof(satellite_addr));
-        satellite_addr.sin_family = AF_INET;
-        memcpy(&satellite_addr.sin_addr.s_addr, satellite_host->h_addr, satellite_host->h_length);
-        satellite_addr.sin_port = htons(SAT_STREAM_PORT);
+        memset(&remote_server_addr, 0, sizeof(remote_server_addr));
+        remote_server_addr.sin_family = AF_INET;
+        memcpy(&remote_server_addr.sin_addr.s_addr, dns_record->h_addr, dns_record->h_length);
+        remote_server_addr.sin_port = htons(REMOTE_HTTP_PORT);
 
-        printf("[Satellite Ingress] Locking telemetry link to orbital transponder arrays...\n");
-        if (connect(sat_socket, (struct sockaddr *)&satellite_addr, sizeof(satellite_addr)) < 0) {
-            close(sat_socket);
+        printf("[Internet Ingress] Connecting to public climate/planetary stream server...\n");
+        if (connect(remote_net_fd, (struct sockaddr *)&remote_server_addr, sizeof(remote_server_addr)) < 0) {
+            fprintf(stderr, "[Internet Error] Connection link rejected by remote host: %s\n", strerror(errno));
+            close(remote_net_fd);
             sleep(5);
             continue;
         }
 
-        printf("[Satellite Ingress] Link locked! Streaming raw down-link byte envelopes...\n");
-        send(sat_socket, downlink_request, strlen(downlink_request), 0);
+        printf("[Internet Ingress] Connected! Fetching live public data arrays...\n");
+        send(remote_net_fd, live_api_request, strlen(live_api_request), 0);
 
-        // Open local socket path straight into the rear core supervisor
-        local_core_socket = socket(AF_INET, SOCK_STREAM, 0);
+        // 2. Open local communication path into your second Sluice-Bench processing engine
+        local_sluice_fd = socket(AF_INET, SOCK_STREAM, 0);
         local_core_addr.sin_family = AF_INET;
         local_core_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
-        local_core_addr.sin_port = htons(MARDUK_CORE_PORT);
+        local_core_addr.sin_port = htons(LOCAL_SLUICE_PORT);
 
-        if (connect(local_core_socket, (struct sockaddr *)&local_core_addr, sizeof(local_core_addr)) >= 0) {
-            char download_register[VOLATILE_BUFFER_SIZE];
-            int chunk_bytes = 0;
+        if (connect(local_sluice_fd, (struct sockaddr *)&local_core_addr, sizeof(local_core_addr)) >= 0) {
+            char dynamic_chunk_register[INGEST_BUFFER_SIZE];
+            int received_stream_bytes = 0;
 
-            // STAGE 1: FRONT SLUICE-BENCH NOISE FILTERING
-            // Read incoming telemetry chunks directly from space link into volatile memory registers
-            while ((chunk_bytes = recv(sat_socket, download_register, VOLATILE_BUFFER_SIZE - 1, 0)) > 0) {
-                download_register[chunk_bytes] = '\0';
+            printf("[Pipeline Flow] Sluice channel synchronized. Streaming raw text bytes to backend...\n");
+
+            // Pull live streaming characters down from the real internet source
+            while ((received_stream_bytes = recv(remote_net_fd, dynamic_chunk_register, INGEST_BUFFER_SIZE - 1, 0)) > 0) {
+                dynamic_chunk_register[received_stream_bytes] = '\0';
                 
-                // Pack metrics data inside an isolated transmission envelope flag frame
-                char envelope_frame[VOLATILE_BUFFER_SIZE + 128];
-                snprintf(envelope_frame, sizeof(envelope_frame),
-                         "POST /SATELLITE_DOWNLINK HTTP/1.1\r\n"
+                // Wrap the live web data bytes into an internal transmission framework envelope
+                char transmission_envelope[INGEST_BUFFER_SIZE + 128];
+                snprintf(transmission_envelope, sizeof(transmission_envelope),
+                         "POST /LIVE_STREAM HTTP/1.1\r\n"
                          "Host: 127.0.0.1\r\n"
                          "Content-Length: %d\r\n\r\n"
-                         "%s", chunk_bytes, download_register);
+                         "%s", received_stream_bytes, dynamic_chunk_register);
                 
-                // Stream it directly to the local C core engine
-                send(local_core_socket, envelope_frame, strlen(envelope_frame), 0);
+                // Deliver the real-world byte weight directly to your backend C processing loops
+                send(local_sluice_fd, transmission_envelope, strlen(transmission_envelope), 0);
             }
-            close(local_core_socket);
-            printf("[Sluice Link] Volatile down-link stream batch cycle complete.\n");
+            close(local_sluice_fd);
+            printf("[Pipeline Flow] Volatile network transaction complete. Registers flushed.\n");
         } else {
-            fprintf(stderr, "[Warning] sa_sluice_core engine offline on local port 8082.\n");
+            fprintf(stderr, "[Pipeline Warning] Sluice-Bench backend offline on port 8082. Launch it first.\n");
         }
 
-        close(sat_socket);
-        printf("[Satellite Ingress] Ingestion cycle complete. Next pass-through in 10s...\n\n");
-        sleep(10);
+        close(remote_net_fd);
+        printf("[Internet Ingress] Batch complete. Restoring collection timers for 10 seconds...\n\n");
+        sleep(10); // Maintain a stable, non-blocking 10s request pacing interval to prevent data cable overload
     }
+
     return 0;
 }
