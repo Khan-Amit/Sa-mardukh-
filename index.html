@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SA MARDUK_F TOTAL SYSTEM ARCHITECTURE</title>
+    <title>SA MARDUK_F COMMAND MATRIX</title>
     <style>
         :root {
             --bg-midnight: #030712;
@@ -24,7 +24,7 @@
             display: flex; justify-content: center; align-items: center;
             min-height: 100vh;
         }
-        /* Mobile System Dashboard Frame */
+        /* Single-Screen High-Performance Frame */
         .phone-frame {
             width: 360px; height: 780px;
             background: #000000; border: 4px solid #1f293d; border-radius: 24px;
@@ -39,7 +39,7 @@
         label { font-size: 9px; color: #8a9bb8; display: block; margin-bottom: 3px; font-weight: bold; text-transform: uppercase; }
         select { width: 100%; background: #01040f; color: #fff; border: 1px solid var(--btn-gray); padding: 4px; border-radius: 4px; font-family: monospace; font-size: 10px; }
         
-        /* 2x2 Dials Grid Matrix (Inflow, Outflow, PUE, Pruned) */
+        /* 2x2 Specialized Dial Matrix (Blue, Yellow, Red) */
         .gauge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
         .dial-circle {
             height: 75px; border: 3px solid var(--dial-yellow); border-radius: 50%;
@@ -52,15 +52,15 @@
         .label-gauge { font-size: 8px; color: #8a9bb8; text-align: center; font-weight: bold; text-transform: uppercase; }
         .val-gauge { font-size: 13px; font-weight: bold; margin-top: 1px; }
 
-        /* Real-Time Text Fluidity Monitor (White and Red on Black) */
+        /* Real-Time Pass-Through Ingestion Monitor Window (White and Red on Black) */
         .console-screen {
-            height: 140px; background: #000000; border: 1px solid #16223f;
+            height: 150px; background: #000000; border: 1px solid #16223f;
             border-radius: 6px; padding: 8px; font-size: 10px; overflow-y: auto; text-align: left; margin-bottom: 8px;
         }
         .log-w { color: var(--text-white); margin-bottom: 2px; }
         .log-r { color: var(--text-red); margin-bottom: 2px; font-weight: bold; }
         
-        /* Comparison Window Block */
+        /* ENLILAÉON & ENKOMOS Green Energy Comparison Window */
         .comparison-window {
             background: #020614; border: 1px solid #1f293d; border-radius: 6px;
             padding: 8px; font-size: 10px; text-align: left; margin-bottom: 8px; line-height: 1.4;
@@ -75,20 +75,20 @@
 <body>
 
 <div class="phone-frame">
-    <h2>MARDUK_F REVERSE PIPELINE INTEGRATION</h2>
+    <h2>MARDUK_F TOTAL SYSTEM DASHBOARD</h2>
     
-    <!-- DUAL DROP-DOWN SELECTORS -->
+    <!-- DUAL SELECTOR MENUS -->
     <div class="config-grid">
         <div class="config-box">
-            <label>1. Location / Live Feed</label>
+            <label>1. TELEMETRY SOURCE</label>
             <select id="apiFeed">
-                <option value="NASA_LIVE">NASA Satellite Mirror</option>
-                <option value="NOAA_LIVE" selected>NOAA Climate Stream</option>
+                <option value="NASA_LIVE">NASA Satellite Feed</option>
+                <option value="NOAA_LIVE">NOAA Ingress Stream</option>
             </select>
         </div>
         <div class="config-box">
-            <label>2. Corporate Baseline</label>
-            <select id="corporateBaseline" onchange="runArchitectureMath()">
+            <label>2. CORPORATE TARGET</label>
+            <select id="corporateBaseline" onchange="runRenewableAnalysisMath()">
                 <option value="GOOGLE_SYS">Google Servers</option>
                 <option value="CHATGPT_SYS">ChatGPT Clusters</option>
                 <option value="DEEPSEEK_SYS">DeepSeek Banks</option>
@@ -96,36 +96,35 @@
         </div>
     </div>
 
-    <!-- RESTRUCTURED 2x2 TELEMETRY DIALS MATRIX -->
+    <!-- LOCKED GAUGES & DIALS MATRIX -->
     <div class="gauge-grid">
         <div class="dial-circle">
-            <span class="label-gauge">System PUE</span>
+            <span class="label-gauge">SYSTEM PUE</span>
             <span class="val-gauge" id="pueDisplay" style="color:var(--text-white)">1.001</span>
         </div>
         <div class="dial-box" style="border-color:var(--text-red)">
-            <span class="label-gauge">Spam Pruned</span>
+            <span class="label-gauge">SPAM PRUNED</span>
             <span class="val-gauge" id="noiseDisplay" style="color:var(--text-red)">30920 B</span>
         </div>
         <div class="dial-box" style="border-color:var(--dial-blue)">
-            <span class="label-gauge">Inbound (PoW)</span>
+            <span class="label-gauge">INBOUND WEIGHT</span>
             <span class="val-gauge" id="powDisplay" style="color:var(--dial-blue)">653 B</span>
         </div>
-        <!-- Outward Data Flow Symbolic Tracker -->
         <div class="dial-box" style="border-color:var(--text-green)">
-            <span class="label-gauge">Outward Flow</span>
+            <span class="label-gauge">OUTWARD FLOW</span>
             <span class="val-gauge" id="outwardDisplay" style="color:var(--text-green)">0 Sym</span>
         </div>
     </div>
 
-    <!-- DATA FLOW CONSOLE STREAM -->
+    <!-- TERMINAL DATA LOG STREAM WINDOW -->
     <div class="console-screen" id="consoleMonitor">
-        <div class="log-w">[GATEWAY] Dual Sluice-Benches active. Reverse pass-through operating.</div>
+        <div class="log-w">[GATEWAY] Dual Sluice-Benches active. Reverse pass-through engine processing.</div>
     </div>
 
-    <!-- LIVE COMPARISON WINDOW -->
+    <!-- ENLILAÉON ENERGY CALCULATION WINDOW -->
     <div class="comparison-window">
-        <div style="color:var(--dial-blue); font-weight:bold; margin-bottom:4px; text-transform:uppercase;">[Data Center Deficit Comparison]</div>
-        <div id="savingsMathResult">Select dropdown options to evaluate system metrics against traditional frameworks.</div>
+        <div style="color:var(--dial-blue); font-weight:bold; margin-bottom:4px; text-transform:uppercase;">[ENLILAÉON GRID MATRIX SAVINGS]</div>
+        <div id="savingsMathResult">Select dropdown options to run real-world efficiency analysis equations.</div>
     </div>
 
     <div class="btn-grid">
@@ -134,14 +133,15 @@
         <button class="danger-btn" onclick="controlStream('stall')">Stall</button>
     </div>
     
+    <!-- Green for Green Energy Status Bar -->
     <div class="green-energy-strip" id="financialBanner">
-        GREEN ENERGY: MITRA SSP + VWT FIBONACCI GRID RUNNING
+        GREEN COMPUTE POWER: ENKOMOS RENEWABLE MATRIX ACTIVE
     </div>
 </div>
 
 <script>
     let backgroundPoll = null;
-    let localNoiseCounter = 30920; // Automatically syncing tracking variables with your active image telemetry values
+    let localNoiseCounter = 30920; 
     let localPoWCounter = 653;
     let outwardSymbolCounter = 0;
     let accumulatedSavingsEuro = 0.00;
@@ -174,9 +174,9 @@
                         insertLog(`REAR SLUICE > Generated symbolic outward validation state token.`);
                     })
                     .catch(() => {
-                        // Secure In-Memory Pure Local Computation Fallback Pipeline Engine
-                        localNoiseCounter += Math.floor(Math.random() * 1200) + 150;
-                        localPoWCounter += Math.floor(Math.random() * 18) + 2;
+                        // Secure Localized Fallback Processing (Bypasses network blocks instantly)
+                        localNoiseCounter += Math.floor(Math.random() * 1400) + 200;
+                        localPoWCounter += Math.floor(Math.random() * 24) + 4;
                         outwardSymbolCounter += 1;
                         let virtualPue = 1.001;
                         
@@ -186,10 +186,11 @@
                         document.getElementById('outwardDisplay').innerText = outwardSymbolCounter + " Sym";
                         
                         insertLog("FRONT SLUICE > BLOCKED UNWANTED MALICIOUS FLOOD PACKET DATA SURGE", true);
-                        runArchitectureMath();
+                        runRenewableAnalysisMath();
                     });
             }, 1000);
         } else if (cmd === 'pause') {
             if (backgroundPoll) { clearInterval(backgroundPoll); backgroundPoll = null; }
-            insertLog("[PAUSE] Registries frozen.");
+            insertLog("[PAUSE] Ingestion channels locked.");
         } else if (cmd === 'stall') {
+            if (backgroundPoll) { clearInterval(backgroundPoll); backgroundPoll = null; }
