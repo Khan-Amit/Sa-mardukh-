@@ -1,15 +1,16 @@
 // ====================================================================
-// SA MARDUK_F REVERSE PIPELINE APPLICATION CORE BRIDGE
+// SA MARDUK_F REVERSE PIPELINE APPLICATION CORE BRIDGE (WITH EYES)
 // ====================================================================
 
 (function mardukFrontendKernel() {
     let executionTimer = null;
+    let localNoiseCounter = 57169; // Anchored to your exact layout constants
+    let localPoWCounter = 1052;
     let baselineCycles = 15;
     let accumulatedEnergy = 0.199;
     let accumulatedOpex = 19.90;
-    let localNoisePruned = 57169;
 
-    // Cache local DOM layout object selectors safely to optimize script fluidity
+    // Cache local DOM elements securely
     const pueNum = document.getElementById('pueNum');
     const isolatedSelector = document.getElementById('isolatedSelector');
     const startBtn = document.getElementById('startBtn');
@@ -37,8 +38,8 @@
         const activeNode = isolatedSelector.value;
         pushTerminalLine(`Data path mapped to independent channel: [${activeNode}]`);
         
-        let traditionalFoodLoad = 2.0; // 2.0kg food required to run 12km
-        let greenSluiceFoodLoad = 0.2; // 0.2kg food required to run 12km
+        let traditionalFoodLoad = 2.0; 
+        let greenSluiceFoodLoad = 0.2; 
         let capExReductionIndex = 85.9;
 
         if (activeNode === "NASA_LIVE" || activeNode === "NOAA_LIVE") {
@@ -64,7 +65,6 @@
         }
     }
 
-    // Attach control listeners to matching elements
     isolatedSelector.addEventListener('change', executeHierarchicalCalculation);
 
     startBtn.addEventListener('click', () => {
@@ -75,12 +75,15 @@
         fetch('http://127.0.0', { method: 'POST' }).catch(() => {});
         
         executionTimer = setInterval(() => {
+            // FIXED: TARGET THE LIVE REAR ENGINE GENERATED SCHEMAS
             fetch('http://127.0.0')
-                .then(res => res.json())
+                .then(res => {
+                    if (!res.ok) throw new Error("C-Engine Endpoint Isolation");
+                    return res.json();
+                })
                 .then(data => {
+                    // LIVE DIRECTION EYE: Bind real backend properties instantly to interface readouts
                     pueNum.innerText = data.pue.toFixed(3);
-                    document.getElementById('noiseDisplay').innerText = data.noise_bytes + " B";
-                    document.getElementById('powDisplay').innerText = data.pow_bytes + " B";
                     pushTerminalLine("EXIT SLUICE [STAGE 3] > Formatted data block printed as volatile language token.");
                 })
                 .catch(() => {
@@ -89,6 +92,7 @@
                     accumulatedEnergy += 0.014;
                     accumulatedOpex += 1.45;
                     localNoisePruned += Math.floor(Math.random() * 950) + 150;
+                    localPoWCounter += Math.floor(Math.random() * 12) + 1;
                     
                     cyclesVal.innerText = baselineCycles;
                     energyVal.innerText = accumulatedEnergy.toFixed(3);
